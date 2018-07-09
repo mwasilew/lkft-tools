@@ -1,0 +1,18 @@
+---
+
+project:
+  name: LKFT
+  contains:
+    - lkft/*
+
+known_issues:
+# Title is deterministic based on test_name and project..
+- test_name: ltp-open-posix-tests/pthread_rwlock_unlock_3-1
+  url: 
+  notes:
+  active: true # default
+  intermittent: false # default
+  branches:
+    - 4.4
+  boards:
+    - hi6220-hikey
