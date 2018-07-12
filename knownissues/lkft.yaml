@@ -2,17 +2,49 @@
 
 project:
   name: LKFT
-  contains:
-    - lkft/*
+  url: https://staging-qa-reports.linaro.org
+  projects:
+    - lkft/mainline
+    - lkft/next
+    - lkft/next
+  environments:
+    - slug: hi6220-hikey
+      architecture: arm64
+    - slug: juno-r2
+      architecture: arm64
+    - slug: dragonboard-410c
+      architecture: arm64
+    - slug: x15
+      architecture: arm32
+    - slug: x86
+      architecture: x86_64
+    - slug: qemu_x86_64
+      architecture: x86_64
+    - slug: qemu_x86_32
+      architecture: x86_32
+    - slug: qemu_arm
+      architecture: arm32
+    - slug: qemu_arm64
+      architecture: arm64
 
 known_issues:
 # Title is deterministic based on test_name and project..
+# test_name: required: suite/test_name
+# url: optional: url to bug
+# notes: optional: description (maybe we can pull this from url?)
+# intermittent: optional boolean, defaults to false
+# projects: required: list of projects to apply known issues to
+# environments: required: list of environment sto apply known issues to
+# state: optional boolean, defaults to 'present'. Set to 'absent' to delete
+#        known issue
 - test_name: ltp-open-posix-tests/pthread_rwlock_unlock_3-1
   url: 
   notes:
   active: true # default
   intermittent: false # default
-  branches:
+  projects:
     - 4.4
-  boards:
-    - hi6220-hikey
+  environments: # hmm, this is a bit awkward.
+    - slug: hi6220-hikey
+    - architecture: arm
+  state: present
