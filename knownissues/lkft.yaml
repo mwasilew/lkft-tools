@@ -1,12 +1,14 @@
----
-
-project:
-  name: LKFT
-  url: https://staging-qa-reports.linaro.org
+projects:
+- name: LKFT
+  #url: https://staging-qa-reports.linaro.org
+  url: http://localhost:8000
   projects:
-    - lkft/mainline
-    - lkft/next
-    - lkft/next
+    - lkft/linux-mainline-oe
+    - lkft/linux-next-oe
+    - lkft/linux-stable-rc-4.4-oe
+    - lkft/linux-stable-rc-4.9-oe
+    - lkft/linux-stable-rc-4.14-oe
+    - lkft/linux-stable-rc-4.17-oe
   environments:
     - slug: hi6220-hikey
       architecture: arm64
@@ -21,30 +23,27 @@ project:
     - slug: qemu_x86_64
       architecture: x86_64
     - slug: qemu_x86_32
-      architecture: x86_32
+      architecture: x86
     - slug: qemu_arm
       architecture: arm32
     - slug: qemu_arm64
       architecture: arm64
 
-known_issues:
-# Title is deterministic based on test_name and project..
-# test_name: required: suite/test_name
-# url: optional: url to bug
-# notes: optional: description (maybe we can pull this from url?)
-# intermittent: optional boolean, defaults to false
-# projects: required: list of projects to apply known issues to
-# environments: required: list of environment sto apply known issues to
-# state: optional boolean, defaults to 'present'. Set to 'absent' to delete
-#        known issue
-- test_name: ltp-open-posix-tests/pthread_rwlock_unlock_3-1
-  url: 
-  notes:
-  active: true # default
-  intermittent: false # default
-  projects:
-    - 4.4
-  environments: # hmm, this is a bit awkward.
-    - slug: hi6220-hikey
-    - architecture: arm
-  state: present
+  known_issues:
+  # Title is deterministic based on test_name and project..
+  # test_name: required: suite/test_name
+  # url: optional: url to bug
+  # notes: optional: description (maybe we can pull this from url?)
+  # intermittent: optional boolean, defaults to false
+  # projects: required: list of projects to apply known issues to
+  # environments: required: list of environment sto apply known issues to
+  - test_name: ltp-open-posix-tests/pthread_rwlock_unlock_3-1
+    url:
+    notes:
+    active: true # default
+    intermittent: false # default
+    projects:
+      - lkft/linux-stable-rc-4.4-oe
+    environments: # hmm, this is a bit awkward.
+      - slug: hi6220-hikey
+      - architecture: arm32
