@@ -296,6 +296,10 @@ def main():
                         'knownissues',
                         api_known_issue
                     )
+            else:
+                pprint.pprint(known_issue.title)
+                pprint.pprint(known_issue.projects)
+                pprint.pprint(known_issue.environments)
 
 
 if __name__ == '__main__':
